@@ -1,63 +1,60 @@
-import { useState, useEffect} from 'react'
-import '../../App.css'
+import { useState, useEffect } from "react";
+import "../../App.css";
 
-import ContactList from '../../components/ContaktList/ContactList'
-import SearchBox from '../../components/SearchBox/SearchBox'
-import ContactForm from '../../components/ContactForm/ContactForm'
+import ContactList from "../../components/ContaktList/ContactList";
+import SearchBox from "../../components/SearchBox/SearchBox";
+import ContactForm from "../../components/ContactForm/ContactForm";
 // import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { selectIsLoading } from '../../redux/contacts/selectors'
+import { useSelector } from "react-redux";
+import { selectIsLoading } from "../../redux/contacts/selectors";
 // import { fetchContacts } from '../../redux/contactsOps'
-import { Loader } from '../../components/Loader/Loader'
-import { useDispatch } from 'react-redux'
-import { selectIsLoggedIn } from '../../redux/auth/selectors'
-import { fetchContacts } from '../../redux/contacts/operations'
-import NewModal from '../../components/Modal/Modal'
-import toast, { Toaster } from 'react-hot-toast';
-
+import { Loader } from "../../components/Loader/Loader";
+import { useDispatch } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { fetchContacts } from "../../redux/contacts/operations";
+import NewModal from "../../components/Modal/Modal";
+import toast, { Toaster } from "react-hot-toast";
 
 function Contacts() {
-  const[modalIsOpen, setModalIsOpen] = useState(false)
-  const[id, setId] = useState('')
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [id, setId] = useState("");
 
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const isLoading = useSelector(selectIsLoading)
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    dispatch(fetchContacts(),
-  )
-  }, [dispatch])
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
-
-  function isOpenModal(id){
-    setId(id)
-setModalIsOpen(true)
+  function isOpenModal(id) {
+    setId(id);
+    setModalIsOpen(true);
   }
 
-  function close(){
-    setModalIsOpen(false)
+  function close() {
+    setModalIsOpen(false);
   }
 
-
- return (
-  <div className='main'>
-    <div className='forms'>
-    
-    <ContactForm/>
-    <SearchBox />
+  return (
+    <div className="main">
+      <div className="forms">
+        <ContactForm />
+        <SearchBox />
+      </div>
+      {isLoading && <Loader className="loader" />}
+      <ContactList isOpen={isOpenModal} />
+      <NewModal isOpen={modalIsOpen} onClose={close} id={id} />
+      <Toaster
+        toastOptions={{
+          className: "toaster",
+        }}
+        containerStyle={{
+          top: 300,
+        }}
+      />
     </div>
-    {isLoading && <Loader className='loader'/>}
-<ContactList isOpen={isOpenModal}/>
-<NewModal isOpen={modalIsOpen} onClose ={close} id={id}/>
-<Toaster toastOptions={{
-    className: 'toaster',
-  }} containerStyle={{
-    top: 300,
-  }}
-/>
-  </div>
- )
+  );
 }
 
-export default Contacts
+export default Contacts;

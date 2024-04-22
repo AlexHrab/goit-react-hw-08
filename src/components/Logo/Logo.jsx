@@ -1,9 +1,7 @@
-import css from './Logo.module.css'
+import css from "./Logo.module.css";
 
-function Logo(){
-    return(
-        <p className={css.phonebook}>Phonebook</p>
-    )
+function Logo() {
+  return <p className={css.phonebook}>Phonebook</p>;
 }
 
-export default Logo
+export default Logo;
