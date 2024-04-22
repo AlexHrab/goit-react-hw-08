@@ -1,14 +1,13 @@
 .list{
+    margin: 0 10px 0;
     list-style-type: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 0;
-    position: absolute;
-    top: 0;
     left: 350px;
     flex-wrap: wrap;
-    height: 100vh;
+    height: 80vh;
     width: 100vh;
-    margin: 0;
+  
 }

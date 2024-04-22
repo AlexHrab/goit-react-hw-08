@@ -1,44 +1,51 @@
 import { useState, useEffect} from 'react'
 import './App.css'
-
-import ContactList from './components/ContaktList/ContactList'
-import SearchBox from './components/SearchBox/SearchBox'
-import ContactForm from './components/ContactForm/ContactForm'
-
+import { Route, Routes } from 'react-router-dom'
+import Layout from './components/Layout/Layout'
+import Home from './pages/Home/Home'
+import Contacts from './pages/Contacts/Contacts'
+import NotFound from './pages/NotFound/NotFound'
+import Login from './pages/Login/Login'
+import Register from './pages/Register/Register'
+import { useDispatch, useSelector } from 'react-redux'
+import { refreshUser } from './redux/auth/operations'
+import { fetchContacts } from './redux/contacts/operations'
+import { selectIsLoggedIn, selectIsRefreshing } from './redux/auth/selectors'
+import PrivateRoute from './routes/PrivateRoute'
+import PublicRoute from './routes/PublicRoute'
+import {useLocation} from 'react-router-dom'
+import { Loader } from './components/Loader/Loader'
 
 
 function App() {
 
-  // const[contacts, setContacts] = useState(() =>
-  //  {const saveContacts = JSON.parse(window.localStorage.getItem("savedContacts"))
-  // return saveContacts || data
-  // })
-  // const[searchName, setSearchName] = useState('')
+  const isRefreshing = useSelector(selectIsRefreshing)
+
+  const location = useLocation();
+    
+    const link = location.pathname
+    
+  const dispatch = useDispatch()
   
+const[locationLink, setTheLink] = useState('')
+
+  useEffect(() => {dispatch(refreshUser()), setTheLink(link)}, [dispatch])
   
-  // useEffect(() => {window.localStorage.setItem("savedContacts", JSON.stringify(contacts))}, [contacts])
-
-  
-
-  // function handleDelContact(id){
-  //   setContacts(contacts.filter(contact => contact.id !== id))
-  // }
-
-  // function getName(){
-  //  return contacts.filter(contact => contact.name.toLowerCase().includes(searchName.toLowerCase()))
-  // }
-
-  // const newContacts = getName()
 
  return (
-  <div>
-    <div className='forms'>
-    <h1 className='phonebook'>Phonebook</h1>
-    <ContactForm/>
-    <SearchBox />
-    </div>
-<ContactList/>
-  </div>
+
+  
+  isRefreshing ? <Loader/> : (
+  <Routes>
+<Route path='/' element={<PrivateRoute><Layout/></PrivateRoute>}>
+<Route index element={<Home/>}/>
+<Route path='contacts' element={<Contacts/>}/>
+</Route>
+<Route path='login' element={<PublicRoute redirectTo={locationLink}><Login/></PublicRoute>}/>
+<Route path='register' element={<PublicRoute redirectTo={locationLink}><Register/></PublicRoute>}/>
+<Route path='*' element={<NotFound/>}/>
+  </Routes>)
+  
  )
 }
 

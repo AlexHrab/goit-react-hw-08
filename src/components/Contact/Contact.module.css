@@ -17,6 +17,7 @@
     text-transform: capitalize;
     color: white;
     font-size: 22px;
+    margin-right: auto;
 }
 
 .btn{
@@ -36,4 +37,15 @@
     display: flex;
     gap: 5px;
     align-items: baseline;
+}
+
+.delete{
+    background-color: red;
+    /* box-sizing: border-box;
+    display: flex;
+    width: 400px;
+    justify-content: space-between;
+   
+    border-radius: 12px;
+    padding: 10px; */
 }

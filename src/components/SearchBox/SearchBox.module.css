@@ -20,11 +20,12 @@ margin-bottom: 8px;
 
 .SearchBox{
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     background-color: #0093E9;
-padding: 30px 20px;
+padding: 10px;
+/* height: 100%; */
 border-radius: 12px;
-width: 300px;
 margin: 0;
-flex-grow: 1;
+/* flex-grow: 1; */
 }

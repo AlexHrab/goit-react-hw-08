@@ -1,51 +1,50 @@
+import Modal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage} from 'formik'
+import css from './Modal.module.css'
+import { useDispatch } from 'react-redux';
+import { editContact } from '../../redux/contacts/operations';
 import * as yup from 'yup' 
-import css from './ContactForm.module.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { addContact, deleteContact} from '../../redux/contacts/operations'
-// import { selectId, selectIsEdit } from '../../redux/contacts/selectors'
-import { useEffect, useState } from 'react'
-
-
 
 const SignupSchema = yup.object().shape({
   name: yup.string().trim()
     .min(2, 'Too Short!')
-    .max(20, 'Too Long!')
-    .required('fild Required!'),
+    .max(20, 'Too Long!'),
   number: yup.string().trim()
     .min(2, 'Too Short!')
-    .max(20, 'Too Long!')
-    .required('fild Required!'),
+    .max(20, 'Too Long!'),
 });
 
+function NewModal({isOpen, onClose, id}){
+    const values = {
+        name: "",
+        number: ""
+      }
 
+      const dispatch = useDispatch()
 
+      function submit(data, actions){
+  if(data.name ==='' && data.number === ''){onClose()}
+  else{
+        dispatch(editContact({data, id}))
+       data = values
+        actions.resetForm();
+        onClose()
+  }
+      }
 
+    return(
+    <Modal
+    isOpen={isOpen}
+    className={css.modal}
+    onRequestClose={onClose}
+    shouldCloseOnEsc={true}
+    ariaHideApp={false}
+    overlayClassName={css.overlay}
+    preventScroll={true}
+    >
+        <div className={css.box}>
 
-function ContactForm(){
-
-const values = {
-  name: "",
-  number: ""
-}
-
-
-
-
-
-const dispatch = useDispatch()
-
-
-function submit(data, actions){
-  
-  dispatch(addContact(data))
- data = values
-  actions.resetForm();
-}
-
-    return (
- <Formik
+        <Formik
       initialValues={values}
       onSubmit={submit}
       validationSchema={SignupSchema}
@@ -55,7 +54,7 @@ function submit(data, actions){
         <label htmlFor="name" className={css.label}>name</label>
         <Field className={css.input} id="name"  name="name" placeholder="Please enter a name" />
         <ErrorMessage className={css.error} name="name" component="span"/>
-        </div>
+               </div>
 
         <div  className={css.inputBlock}>
         <label htmlFor="number" className={css.label}>number</label>
@@ -66,7 +65,9 @@ function submit(data, actions){
         <button type="submit" className={css.btn} >Submit</button>
       </Form>
     </Formik>
+        </div>
+    </Modal>
     )
 }
 
-export default ContactForm
+export default NewModal;

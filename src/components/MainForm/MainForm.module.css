@@ -1,0 +1,99 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 400px;
+    padding: 10px 10px 60px;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #0093E9;
+    border-radius: 8px;
+    height: 500px;
+    position: relative;
+
+}
+
+.label{
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #0093E9;
+  position: relative;
+    flex-direction: column;
+    padding: 0;
+    box-sizing: border-box;
+    display: inline-flex;
+}
+
+.iconBtn{
+    position: absolute;
+    right: 10px;
+    top: 42px;
+    box-sizing: content-box;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.iconBtn:hover, .iconBtn:active, .iconBtn:focus{
+    border: none;
+}
+
+
+.icon{
+    fill: #0093E9;
+}
+
+.field{
+    width: 300px;
+    align-self: center;
+    height: 30px;
+    border: 2px solid #0093E9;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 24px;
+    color: #0093E9;
+    outline: none;
+}
+
+.btn{
+    display: flex;
+width: 120px;
+align-items: center;
+height: 40px;
+border-radius: 8px;
+justify-content: center;
+        color: white;
+        background-color: #0093E9;
+    text-transform: uppercase;
+    font-weight: 700;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.span{
+    display: flex;
+    align-items: baseline;
+}
+
+.logo{
+    position: absolute;
+    top: 0;
+}
+
+.wrapper{
+    position: absolute;
+    top: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error{
+    text-transform: uppercase;
+    color: red;
+    font-size: 18px;
+    position:absolute;
+    font-weight: 700;
+    top: 75px;
+}
