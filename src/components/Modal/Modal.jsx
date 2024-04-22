@@ -10,10 +10,10 @@ const SignupSchema = yup.object().shape({
   number: yup.string().trim().min(2, "Too Short!").max(20, "Too Long!"),
 });
 
-function NewModal({ isOpen, onClose, id }) {
+function NewModal({ isOpen, onClose, contact }) {
   const values = {
-    name: "",
-    number: "",
+    name: contact.name,
+    number: contact.number,
   };
 
   const dispatch = useDispatch();
@@ -22,8 +22,7 @@ function NewModal({ isOpen, onClose, id }) {
     if (data.name === "" && data.number === "") {
       onClose();
     } else {
-      dispatch(editContact({ data, id }));
-      data = values;
+      dispatch(editContact({ data, id: contact.id }));
       actions.resetForm();
       onClose();
     }

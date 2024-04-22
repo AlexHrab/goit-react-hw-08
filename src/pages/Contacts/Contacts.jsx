@@ -27,8 +27,8 @@ function Contacts() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  function isOpenModal(id) {
-    setId(id);
+  function isOpenModal(contact) {
+    setId(contact);
     setModalIsOpen(true);
   }
 
@@ -44,7 +44,7 @@ function Contacts() {
       </div>
       {isLoading && <Loader className="loader" />}
       <ContactList isOpen={isOpenModal} />
-      <NewModal isOpen={modalIsOpen} onClose={close} id={id} />
+      <NewModal isOpen={modalIsOpen} onClose={close} contact={id} />
       <Toaster
         toastOptions={{
           className: "toaster",

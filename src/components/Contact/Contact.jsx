@@ -23,7 +23,7 @@ function Contact({ id, name, number, isOpen }) {
         </span>
       </p>
 
-      <button className={css.btn} onClick={() => isOpen(id)}>
+      <button className={css.btn} onClick={() => isOpen({ id, name, number })}>
         Edit
       </button>
 

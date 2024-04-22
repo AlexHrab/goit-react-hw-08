@@ -43,18 +43,12 @@ export const addContact = createAsyncThunk(
 
 export const editContact = createAsyncThunk(
   "contacts/editContact",
-  async (value, thunkAPI) => {
-    console.log(value);
-
+  async ({ id, ...contact }, thunkAPI) => {
     try {
-      const data = await LogIn.patch(`contacts/${value.id}`, {
-        name: !value.data.name ? value.id.name : value.data.name,
-        number: !value.data.number ? value.id.number : value.data.number,
-      });
-      console.log(value);
+      const data = await LogIn.patch(`contacts/${id}`, contact.data);
       return data.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(alert(error.message));
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
